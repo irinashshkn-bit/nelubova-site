@@ -167,13 +167,41 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   .rev-strip{grid-template-columns:1fr 1fr}
   .svc-grid{grid-template-columns:1fr}
   .svc.wide{flex-direction:column;align-items:flex-start}
-  .portrait{max-width:380px;margin:0 auto}
+  .portrait{max-width:380px;width:100%;margin:8px auto 0;aspect-ratio:auto;height:480px}
 }
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--ink);border-radius:2px}
+.m-menu{display:none;flex-direction:column;gap:6px;padding:14px 24px 22px;background:rgba(242,246,241,.98);border-bottom:1px solid #DDE7DD}
+.m-menu a{padding:12px 0;text-decoration:none;color:var(--ink);font-weight:600;font-size:16px;border-bottom:1px solid #E3ECE4}
+.m-menu .btn{justify-content:center;margin-top:12px;border:none;color:#fff}
+.m-menu.open{display:flex}
 @media(max-width:600px){
-  section{padding:60px 0}
+  section{padding:56px 0}
+  .wrap{padding:0 18px}
   .pr-grid,.steps-grid,.price-grid,.ev-grid{grid-template-columns:1fr}
   .nav-links{display:none}
-  .deck{height:320px;transform:scale(.85)}
+  .nav .btn{display:none}
+  .burger{display:flex}
+  .hero{padding:44px 0 64px}
+  .hero h1{font-size:clamp(34px,9.5vw,44px)}
+  .hero p.lead{font-size:16px}
+  .hero-cta .btn{width:100%;justify-content:center}
+  .portrait{max-width:320px;height:420px;order:-1;margin-bottom:26px}
+  .hero-grid{display:flex;flex-direction:column}
+  .principles,.events,.deck-sec{margin:0 10px;border-radius:26px}
+  .proof{gap:22px}
+  .deck{height:290px}
+  .mcard{width:150px;height:230px}
+  .mcard:nth-child(1){transform:rotate(-10deg) translateX(-52px)}
+  .mcard:nth-child(3){transform:rotate(9deg) translateX(52px)}
+  .mcard.flip{transform:rotate(0) translateX(0) rotateY(180deg) scale(1.04)}
+  .mcard .front b{font-size:18px}
+  .mcard .front span{font-size:11.5px}
+  .deck-form .btn{width:100%;justify-content:center}
+  .rev-strip{grid-template-columns:1fr 1fr;gap:12px}
+  .svc.wide .btn{width:100%;justify-content:center}
+  .final .hero-cta .btn{width:100%}
+  footer .wrap{flex-direction:column}
 }
 </style>
 </head>
@@ -190,7 +218,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
       <a href="#faq">Вопросы</a>
     </nav>
     <a class="btn" href="#" onclick="return false">Написать мне</a>
+    <button class="burger" aria-label="Меню" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
+  <nav class="m-menu" id="mmenu">
+    <a href="#approach" onclick="toggleMenu()">Подход</a>
+    <a href="#services" onclick="toggleMenu()">Практики</a>
+    <a href="#events" onclick="toggleMenu()">Афиша</a>
+    <a href="#price" onclick="toggleMenu()">Стоимость</a>
+    <a href="#faq" onclick="toggleMenu()">Вопросы</a>
+    <a class="btn" href="#" onclick="return false">Написать в Telegram</a>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -408,6 +445,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 </footer>
 
 <script>
+function toggleMenu(){document.getElementById('mmenu').classList.toggle('open')}
 function flip(el){
   document.querySelectorAll('.mcard').forEach(c=>{if(c!==el)c.classList.remove('flip')});
   el.classList.toggle('flip');
